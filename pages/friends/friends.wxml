@@ -1,0 +1,34 @@
+<!--pages/friends/friends.wxml-->
+<!--pages/mingxi/mingxi.wxml-->
+<view class="container">
+    <view class='noOrder' wx:if="{{friendList.legth==0}}">
+        <view class="noOrder2" style="font-size:26rpx;text-align:center;padding:20rpx;margin-top:0;box-sizing:border-box;">
+            暂时没有数据！ 
+        </view>
+    </view>
+    <view class='content' wx:else>
+        <view class="nav">
+            <view class="{{active == 0?'active':'default'}}" data-active="0" data-order="" bindtap="tapKeyWorld">最新</view>
+            <view class="{{active == 1?'active':'default'}}"  data-active="1" data-order="fans" bindtap="tapKeyWorld">粉丝最多</view>
+            <view class="{{active == 2?'active':'default'}}"  data-active="2" data-order="orders" bindtap="tapKeyWorld">出单最多</view>
+        </view>
+        <view id='mingxi'>
+            <view class='list' wx:for="{{friendList}}" wx:key="{{item.index}}">
+                <view class='left'>
+                    <image src='{{item.avatarurl}}' mode='widthFix'></image>
+                </view>
+                <view class="center">
+                    <view class='h4'><image src="../images/star.png" mode='widthFix'></image>{{item.wx_name}}</view>
+                    <view class='name'>成为代理商时间：{{item.sharer_time}}</view>
+                </view>
+                <view class="right">  
+                    <view class='h4'>
+                        <view>{{item.mid}}</view>
+                        <view>{{item.countMember}}个成员</view>
+                    </view>
+                </view>
+            </view> 
+        </view> 
+    </view>
+</view>
+

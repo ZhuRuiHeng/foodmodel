@@ -1,0 +1,55 @@
+/* pages/use/use.wxss */
+@import "../../utils/lib/weui.wxss";
+
+label {
+  display: inline-block;
+  min-width: 270rpx;
+  margin-right: 20rpx;
+}
+form{
+  width: 100%;
+  font-size: 24rpx;
+  padding:0 20rpx;
+}
+form input{
+  font-size: 24rpx;
+}
+.picker-text {
+  margin-left: 20rpx;
+  position: relative;
+}
+.page-section{
+  display: flex;
+  justify-content: flex-start;
+  background: #fff;
+  border-bottom:1px solid #e5e5e5;
+  padding:10rpx;
+
+}
+.weui-cells:after,.weui-cells:before{
+  content: none;
+}
+.inputALL{
+  background: #FFF;
+  padding: 0 20rpx;
+}
+.page-section .page-section-title{
+  height:60rpx;
+  line-height:60rpx;
+  display:inline-block;
+  width:120rpx;
+}
+.btn-area button{
+  margin: 20rpx;
+  font-size: 28rpx;
+}
+button{
+  border-radius: 8rpx;
+}
+view.btn{
+  color:#1AAD19;font-size:26rpx;padding:20rpx 60rpx 20rpx 0;
+}
+.submit_btn{
+  background: #1AAD19;
+  color:#fff;
+}

@@ -1,0 +1,30 @@
+<!--pages/address/address.wxml-->
+<view class="container">
+    <view class="weui-cells weui-cells_after-title">
+        <radio-group bindchange="radioChange">
+          <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="{{item.value}}">
+              <view class="weui-cell__hd">
+                <radio value="{{item.value}}" checked="true" color="#ff4444"/>
+              </view>
+              <view class="weui-cell__bd">
+                  <view class="classname">{{item.name}}，{{item.tel}}</view>
+                  <view class="classname">收货地址：{{item.address}}</view>
+              </view>
+              <view class="weui-cell__hd" bindtap="bianji">
+                  <image src="../images/bianji.png" mode="widthFix"></image>
+              </view>
+          </label>
+        </radio-group>
+      </view>
+      <view class="flex">
+          <label class="weui-cell weui-check__label" >
+              <view class="weui-cell__hd">
+                <radio value="{{item.value}}" checked="true" color="#ff4444"/>
+              </view>
+              <view class="weui-cell__bd">新增收货地址</view>
+              <view class="weui-cell__hd" bindtap="bianji">
+                  <image src="https://qncdn.playonwechat.com/shangcheng/next.png" width="40rpx;" mode="widthFix"></image>
+              </view>
+          </label>
+      </view>
+</view>

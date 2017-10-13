@@ -1,0 +1,230 @@
+<!--index.wxml-->
+<import src="../../dist/toast/index.wxml" />
+<!--引入模板  -->
+<template is="zan-toast" data="{{ zanToast }}"></template>
+<view class="container">
+     <!--搜索  -->
+   <view class="searchBox">
+        <view class="search" bindtap="search">
+            <view class="icon-search"><image src="https://qncdn.playonwechat.com/shangcheng/search.png"></image></view>
+            <view class="weui-cells weui-cells_after-title">
+                <view class="weui-cell weui-cell_input">
+                    <input class="weui-input"  placeholder="搜索商品" readonly="readonly"/>
+                </view>
+            </view>
+        </view> 
+        <view class="img" >
+          <image src="../images/chart.png" mode="widthFix" style="width:40rpx;vertical-align: middle;"></image>
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:20rpx;right:10rpx;">  
+          </contact-button>  
+          <contact-button class="contact" type="default-light" size="12" session-from="weapp" style="opacity:0;position:absolute;top:20rpx;right:0rpx;">  
+          </contact-button>
+        </view>
+    </view>
+    <!--轮播图 -->
+    <swiper class="swiper" bindtap="imgPreview"  indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="#ff4444" indicator-active-color="#fff">
+      <block wx:for="{{lunbo}}">
+        <swiper-item>
+          <image src="{{item.icon}}" class="slide-image" mode="aspectFill" id="{{item.gid}}" catchtap="swipclick"/>
+        </swiper-item>
+      </block>
+    </swiper>
+    <!--分类 新增star -->
+    <view class="sort">
+        <navigator wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}"  url="../fenlei/fenlei?cate_id={{item.cate_id}}&index={{index}}">
+            <view class="image-text">
+              <image src="{{item.icon}}" mode="scaleToFill"  binderror="errorFunction"></image>
+              <text>{{item.cate_name}}</text>
+            </view>
+        </navigator>
+    </view>
+    <view class="groupon groupon1" wx:if="{{fightGroups != null}}">
+        <view class="gpTitle">
+            <!-- <image src="../images/zhu.png" mode="widthFix"></image> -->
+            <text>拼团好货</text>
+        </view>
+        <view class="gpList" style="padding-bottom:10rpx;">
+            <navigator wx:for="{{fightGroups}}" wx:key="{{item.index}}" class="gpimage" url="../pintuan/pintuan?gid={{item.gid}}" >
+                <image src="{{item.picture}}" mode="aspectFill" binderror="errorFunction"></image>
+            </navigator>
+        </view>
+    </view>
+    <!-- ms -->
+     <!-- <view class="groupon groupon1">
+        <view class="gpTitle miao">
+            <view class="classname"><text>特价福利 </text><image style="margin-left:20rpx;width:40rpx" src="../images/times.png" mode="widthFix"></image></view>
+           <navigator url="../miaosha/miaosha?gid=6" style="display:inline;color:#ff4444;font-size:24rpx;">
+                查看更多<image src="../images/nexta.png" mode="widthFix"/>
+            </navigator>
+        </view>
+        <view class="Tall">
+            <view class="xianshi">
+                <view class="left">
+                    <text class="classname" style="color:#000000;font-weight:bold;font-size:26rpx">限时秒杀</text>
+                    <text class="classname" style="color:#666666">包邮抢购中</text>
+                </view>
+                <view class="right">
+                    <view class="center time" >场结束仅剩 <text>11</text>：<text>09</text>：<text>01</text></view>
+                    <view class="center countdown" >23424537{{item.hr}}时{{item.min}}分{{item.sec}}秒</view>
+                </view>
+            </view>
+            <view class="gpList">
+                <navigator  class="gpimage" url="../miaosha/miaosha?gid=6">
+                    <image style="height:198rpx;" src="https://qncdn.playonwechat.com/shop/goods/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20170913151306.webp" mode="aspectFill"></image>
+                </navigator>
+            </view>
+        </view>
+    </view>  -->
+    <!-- ms -->
+    <view class="groupon" wx:if="{{currentSeckillTime != null}}">
+        <view class="gpTitle miao">
+            <view class="classname"><text>特价福利 </text><image style="margin-left:20rpx;width:40rpx" src="../images/times.png" mode="widthFix"></image></view>
+           <navigator url="../miaosha/miaosha?gid={{item.gid}}" style="display:inline;color:#ff4444;font-size:24rpx;">
+                查看更多<image src="../images/nexta.png" mode="widthFix"/>
+            </navigator>
+        </view>
+        <!-- <view class="center time" >暂时没有秒杀场次</view> -->
+        <view class="Tall">
+            <view class="xianshi">
+                <view class="left">
+                    <text class="classname" style="color:#000000;font-weight:bold;font-size:26rpx">限时秒杀</text>
+                    <text class="classname" style="color:#666666">包邮抢购中</text>
+                </view>
+                <view class="right">
+                    <view class="center time" wx:for="{{Countdown}}">{{currentSeckillTime}}场结束仅剩 
+                                            <text>{{item.hr}}</text>：
+                                            <text>{{item.min}}</text>：
+                                            <text>{{item.sec}}</text></view>
+                    <!-- <view class="center countdown" wx:for="{{Countdown}}">{{item.hr}}时{{item.min}}分{{item.sec}}秒</view> -->
+                </view>
+            </view>
+            <view class="gpList">
+                <navigator wx:for="{{seckills}}" wx:key="{{item.index}}" class="gpimage" url="../miaosha/miaosha?gid={{item.gid}}">
+                    <image style="height:198rpx;" src="{{item.picture}}" mode="aspectFill"></image>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <!--新增end  -->
+    <!--内容  -->
+    <view class="like">
+        猜你喜欢
+    </view>
+    <!--nav -->
+    <view class="main">
+        <view class="nav bc_white">
+             <view class="{{state == 0?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="hot" data-cate="0" data-state = "0"><span>最热</span></view>
+             <view class="{{state == 1?'red':'default'}}" bindtap="tapKeyWorld" data-ontap="newest" data-cate="0" data-state = "1"><span>最新</span></view> 
+        </view>
+        <!--content -->
+        <view>
+            <view class="service-list">
+              <navigator class="service-item" wx:for="{{main_content}}" wx:key="{{item.gid}}" url="../inform/inform?gid={{item.gid}}">
+                    <view class="service-img">
+                        <image src="{{item.picture}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="service-text">
+                        <view class="service-tite">{{item.good_name}}</view>
+                        <view class="caozuo">
+                            <text class="service-price">￥{{item.price}}</text>
+                            <view class="service-gouwu"><image src="https://qncdn.playonwechat.com/shangcheng/car.png"></image></view>
+                        </view>
+                        <view id="gouwu{{item.gid}}" data-gid="{{item.gid}}" class="buy-response" catchtap="addCar"></view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view>
+    <!--结束  -->
+    <!--分类模块开始  -->
+    <!-- <view class="modelAll{{index}} modelAlls" style="width:100%" wx:for="{{modules}}" data-allindex="{{index}}" wx:key="{{item.id}}" bindtap="suoyin">
+        <navigator class="nextUrl" url="../more/more?cate_id={{item.cate_id}}">
+            <view class="medit">
+                <view class="center">
+                    <text class="title">{{item.cate_name}}</text>
+                    <view class="all"><image src="https://qncdn.playonwechat.com/shangcheng/next.png"></image></view>
+                </view>
+            </view>
+        </navigator>
+        <view class="goodImg" style="width:100%">
+              <image src="{{item.recommendGoods.icon}}" cata-gid="{{item.recommendGoods.gid}}" style="width:100%" id="{{index}}" catchtap="swipclick" mode="widthFix"/>
+        </view>
+        <view class="nav bc_white">
+            <view  wx:for="{{item.sonCategory}}" 
+                   wx:key="{{index}}"   data-fid="{{item.cate_id}}" 
+                   wx:for-item="tab" class="{{tab.active == true?'red':'default'}} {{cate == true?'red':'default'}}" 
+                   bindtap="tapKeyWorld1" 
+                   data-ontap="{{tab.cate_name}}" 
+                   data-cate="{{tab.cate_id}}" 
+                   data-active="{{tab.active}}"><span>{{tab.cate_name}}</span>
+            </view>
+        </view>
+        <view class="modeList">
+            <view class="service-list">
+                <navigator class="service-item" wx:for="{{item.typelist}}" wx-item="typelist"  wx:for-item="v" wx:key="{{item.id}}" url="../inform/inform?gid={{v.gid}}">
+                    <view class="service-img">
+                        <image src="{{v.picture}}" mode="aspectFill"></image>
+                    </view>
+                    <view class="service-text">
+                        <view class="service-tite">{{v.good_name}}</view>
+                        <view class="caozuo">
+                            <text class="service-price">￥{{v.price}}</text>
+                            <view class="service-gouwu"><image src="https://qncdn.playonwechat.com/shangcheng/car.png" ></image></view>
+                        </view>
+                        <view id="gouwu{{v.gid}}" data-gid="{{v.gid}}" class="buy-response" catchtap="addCar"></view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+    </view> -->
+    <!--查看全部  -->
+    <view class="all chakan" bindtap="seeAll">
+        查看全部
+    </view>
+    <!--购物车弹窗  -->
+    <view class="bg {{addCar?'show':'hidden'}}"></view> 
+    <view class="carBox {{addCar?'show':'hidden'}}">
+        <view class="padding">
+            <view class="top">
+                <view class="left">
+                     <!-- <image src="{{inform.picture[0]}}"></image>  -->
+                    <image src="{{figure}}"></image>
+                </view>
+                <view class="right">
+                    <text class="shuoming">{{inform.good_name}}</text>
+                    <text class="price">
+                        <text wx:if="{{low_price == high_price}}">￥{{low_price}}</text> 
+                        <text wx:else>￥{{low_price}}~{{high_price}}</text>
+                    </text>
+                </view>
+                <view class="del" bindtap="closeCar">
+                    <image src="https://qncdn.playonwechat.com/shangcheng/icon_close.png" mode="widthFix"></image>
+                </view>
+            </view>
+            <view class="kuanshi"  wx:for="{{inform.attribute}}" wx:key="{{index}}">
+                <view class="title" data-anid="{{item.anid}}" data-attribute_name="{{item.attribute_name}}">{{item.attribute_name}}：</view>
+                <view class="leibie" data-anid="{{item.anid}}"  bindtap="leibieall" data-index="{{index}}">
+                    <view  wx:for="{{item.attribute_value}}" wx:key="{{index}}"  
+                          wx:for-item="attr" data-avid="{{attr.avid}}" data-value="{{attr.attribute_value}}" data-active="{{attr.active}}"
+                          class="text white {{attr.active==true ? 'red':''}}" 
+                          bindtap="xuanze" >{{attr.attribute_value}}</view>
+                </view>
+            </view>
+            <view class="mid">
+                <view class="buy">
+                    <text>购买数量：{{price}}</text>
+                    <text class="gray">剩余{{inform.total_stock-price}}件</text>
+                </view>
+                <view class="num">
+                    <button class="reduce {{minusStatus}}" bindtap="bindMinus">-</button>
+                    <input type="number"  bindchange="bindManual" value="{{price}}" readonly="readonly"/>
+                    <button class="add normal" bindtap="bindPlus">+</button>
+                </view>
+            </view>
+        </view>
+        <view class="btn">
+            <button class="addCar" bindtap="addCars">加入购物车</button>
+            <!-- <button class="buy" bindtap="buy" >立即购买</button> -->
+        </view>
+    </view>
+</view>

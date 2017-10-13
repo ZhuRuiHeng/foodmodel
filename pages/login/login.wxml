@@ -1,0 +1,32 @@
+<!--pages/use/use.wxml-->
+<view class="container">
+    <form bindsubmit="formSubmit">
+      <view class="inputALL">
+            <view class="page-section">
+                <view class="page-section-title">联系电话</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                      <input class="weui-input" bindinput="bindKeyInput" type="number" name="phone" placeholder="手机或固定电话" />
+                    </view>
+                  </view>
+                </view>
+            </view>
+            <view class="page-section">
+                <view class="page-section-title">验证码</view>
+                <view class="weui-cells weui-cells_after-title">
+                  <view class="weui-cell weui-cell_input">
+                    <view class="weui-cell__bd">
+                      <input class="weui-input" bindinput="verifyCode" type="number" name="code" placeholder="请填写验证码" />
+                    </view>
+                     <view class="btn" wx:if="{{selected}}" bindtap="countdown">{{second}}s后重新获取</view>
+                    <view class="btn" wx:if="{{selected1}}" bindtap="getphone">点击获取验证码</view>
+                  </view>
+                </view>
+            </view>
+        </view>
+        <view class="btn-area">
+            <button class="submit_btn" bindtap="loginIn" formType="submit" >立即绑定</button>
+        </view>
+    </form>
+</view>
